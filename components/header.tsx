@@ -47,7 +47,7 @@ export function Header() {
           </Sheet>
 
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-bold text-xl">360 Business Magician</span>
+            <span className="font-bold text-xl">360 Job Magician</span>
           </Link>
         </div>
 
@@ -98,4 +98,3 @@ export function Header() {
     </header>
   )
 }
-
