@@ -12,6 +12,7 @@ import {
   AccessibilityPreference,
   AIServiceResponse,
 } from "./types";
+import { generateRequestId } from "./utils";
 
 /** Default configuration for Adaptive Learning System */
 export const adaptiveLearningConfig: AdaptiveLearningConfig = {
@@ -42,7 +43,7 @@ export const adaptiveLearningConfig: AdaptiveLearningConfig = {
 export async function getLearningRecommendations(
   request: LearningRecommendationRequest
 ): Promise<AIServiceResponse<LearningRecommendationResponse>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("learn");
   const timestamp = new Date().toISOString();
 
   try {
@@ -84,7 +85,7 @@ export async function updateLearningPreferences(
     pacePreference?: "slow" | "moderate" | "fast";
   }
 ): Promise<AIServiceResponse<{ updated: boolean }>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("learn");
   const timestamp = new Date().toISOString();
 
   try {
@@ -120,11 +121,6 @@ export function getAvailableLearningModes(): LearningMode[] {
  */
 export function getSupportedAccessibilityPreferences(): AccessibilityPreference[] {
   return adaptiveLearningConfig.adaptationSettings.accessibilityPreferences;
-}
-
-/** Helper function to generate request ID */
-function generateRequestId(): string {
-  return `learn-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 }
 
 /** Generate personalized learning recommendations */

@@ -10,6 +10,7 @@ import {
   JobMatch,
   AIServiceResponse,
 } from "./types";
+import { generateRequestId, SKILL_ASSESSMENT } from "./utils";
 
 /** Default configuration for VR Business AI */
 export const vrBusinessAIConfig: VRBusinessAIConfig = {
@@ -41,7 +42,7 @@ export const vrBusinessAIConfig: VRBusinessAIConfig = {
 export async function matchJobs(
   request: JobMatchRequest
 ): Promise<AIServiceResponse<JobMatchResponse>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("vr");
   const timestamp = new Date().toISOString();
 
   try {
@@ -78,14 +79,16 @@ export async function assessSkills(
   clientId: string,
   skills: string[]
 ): Promise<AIServiceResponse<{ assessedSkills: Record<string, number> }>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("vr");
   const timestamp = new Date().toISOString();
 
   try {
     const assessedSkills: Record<string, number> = {};
     skills.forEach((skill) => {
-      // Simulate skill assessment scoring
-      assessedSkills[skill] = Math.round(Math.random() * 40 + 60); // Score between 60-100
+      // Simulate skill assessment scoring using defined constants
+      assessedSkills[skill] = Math.round(
+        Math.random() * SKILL_ASSESSMENT.SCORE_RANGE + SKILL_ASSESSMENT.MIN_SCORE
+      );
     });
 
     return {
@@ -115,7 +118,7 @@ export async function getAccommodationRecommendations(
   clientId: string,
   needs: string[]
 ): Promise<AIServiceResponse<{ recommendations: string[] }>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("vr");
   const timestamp = new Date().toISOString();
 
   try {
@@ -168,11 +171,6 @@ export async function getAccommodationRecommendations(
       timestamp,
     };
   }
-}
-
-/** Helper function to generate request ID */
-function generateRequestId(): string {
-  return `vr-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 }
 
 /** Helper function to generate sample job matches */

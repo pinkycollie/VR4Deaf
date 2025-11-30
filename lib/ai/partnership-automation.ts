@@ -10,6 +10,7 @@ import {
   AutomationFeature,
   AIServiceResponse,
 } from "./types";
+import { generateRequestId } from "./utils";
 
 /** Default configuration for Partnership Automation */
 export const partnershipAutomationConfig: PartnershipAutomationConfig = {
@@ -40,7 +41,7 @@ export const partnershipAutomationConfig: PartnershipAutomationConfig = {
 export async function executeAction(
   request: PartnershipActionRequest
 ): Promise<AIServiceResponse<PartnershipActionResponse>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("partner");
   const timestamp = new Date().toISOString();
 
   try {
@@ -77,7 +78,7 @@ export async function scorePartnerLead(
     accessibilityCommitment: boolean;
   }
 ): Promise<AIServiceResponse<{ score: number; tier: string; reasons: string[] }>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("partner");
   const timestamp = new Date().toISOString();
 
   try {
@@ -133,11 +134,11 @@ export async function scheduleFollowUp(
   followUpType: "initial" | "monthly" | "quarterly" | "annual",
   scheduledDate: string
 ): Promise<AIServiceResponse<{ scheduleId: string; scheduledFor: string }>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("partner");
   const timestamp = new Date().toISOString();
 
   try {
-    const scheduleId = `followup-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    const scheduleId = generateRequestId("followup");
 
     return {
       success: true,
@@ -168,11 +169,11 @@ export async function generatePartnershipDocument(
   partnerId: string,
   documentType: "agreement" | "proposal" | "report" | "invoice"
 ): Promise<AIServiceResponse<{ documentId: string; status: string }>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("partner");
   const timestamp = new Date().toISOString();
 
   try {
-    const documentId = `doc-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    const documentId = generateRequestId("doc");
 
     return {
       success: true,
@@ -203,16 +204,11 @@ export function getAvailableFeatures(): AutomationFeature[] {
   return partnershipAutomationConfig.automationFeatures;
 }
 
-/** Helper function to generate request ID */
-function generateRequestId(): string {
-  return `partner-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-}
-
 /** Process the automation action */
 async function processAction(
   request: PartnershipActionRequest
 ): Promise<PartnershipActionResponse> {
-  const actionId = `action-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+  const actionId = generateRequestId("action");
 
   // Simulate action processing based on type
   switch (request.action) {

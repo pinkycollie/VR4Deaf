@@ -10,6 +10,7 @@ import {
   ReportType,
   AIServiceResponse,
 } from "./types";
+import { generateRequestId } from "./utils";
 
 /** Default configuration for Reporting Service */
 export const reportingConfig: ReportingConfig = {
@@ -40,7 +41,7 @@ export const reportingConfig: ReportingConfig = {
 export async function generateReport(
   request: ReportRequest
 ): Promise<AIServiceResponse<ReportResponse>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("report");
   const timestamp = new Date().toISOString();
 
   try {
@@ -85,7 +86,7 @@ export async function scheduleReport(
   frequency: "daily" | "weekly" | "monthly" | "quarterly",
   recipients: string[]
 ): Promise<AIServiceResponse<{ scheduleId: string }>> {
-  const requestId = generateRequestId();
+  const requestId = generateRequestId("report");
   const timestamp = new Date().toISOString();
 
   try {
@@ -93,7 +94,7 @@ export async function scheduleReport(
       throw new Error("Scheduled reports are not enabled");
     }
 
-    const scheduleId = `schedule-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    const scheduleId = generateRequestId("schedule");
 
     return {
       success: true,
@@ -112,11 +113,6 @@ export async function scheduleReport(
       timestamp,
     };
   }
-}
-
-/** Helper function to generate request ID */
-function generateRequestId(): string {
-  return `report-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 }
 
 /** Build report data based on type */

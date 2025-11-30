@@ -6,6 +6,9 @@
 // Types
 export * from "./types";
 
+// Utilities
+export { generateRequestId, SKILL_ASSESSMENT } from "./utils";
+
 // VR Business AI Service
 export {
   vrBusinessAIConfig,
