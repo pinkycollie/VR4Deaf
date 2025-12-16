@@ -41,11 +41,11 @@
     "access": "public"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^22",
-    "typescript": "^5",
+    "typescript": "^5.0.0",
     "vitest": "^4.0.14"
   }
 }
