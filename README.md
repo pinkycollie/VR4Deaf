@@ -2,6 +2,11 @@
 
 A comprehensive Deaf-first platform connecting clients with vocational rehabilitation resources, workforce solutions, and business development opportunities through AI-powered accessibility.
 
+> **🔄 Repository Migration In Progress**: This repository is being consolidated from multiple VR4DEAF-related codebases. See [MIGRATION_PLAN.md](MIGRATION_PLAN.md) for details.
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![In Migration](https://img.shields.io/badge/Status-Migrating-yellow.svg)](docs/migration/progress.md)
+
 ## Core Features
 
 - ASL-integrated learning environments with visual-first design
@@ -9,6 +14,24 @@ A comprehensive Deaf-first platform connecting clients with vocational rehabilit
 - AI-driven career matching and skills assessment
 - Business development modules for deaf entrepreneurs
 - Automated virtual support system with 24/7 assistance
+
+## 🔄 Migration Status
+
+This repository is undergoing consolidation to become the single source of truth for all VR4DEAF-related code, tools, and services. 
+
+**Current Phase**: Phase 1 - Repository Audit  
+**Progress**: Planning Complete, Audit Not Started
+
+### Migration Phases
+- [x] Phase 0: Planning and Documentation
+- [ ] Phase 1: Repository Audit and Discovery
+- [ ] Phase 2: Archive and Deprecation
+- [ ] Phase 3: Frontend and Tools Migration
+- [ ] Phase 4: Backend, AI, and Service Migration
+- [ ] Phase 5: Update Links, Configs, and Metadata
+- [ ] Phase 6: Final Review and Deployment
+
+📊 **[View Detailed Progress](docs/migration/progress.md)** | 📋 **[Read Migration Plan](MIGRATION_PLAN.md)**
 
 ## Technical Architecture
 
@@ -83,7 +106,22 @@ Phase 3 (2-3 weeks): Business Modules
 
 ## Contributing
 
-We welcome contributions that enhance accessibility and user experience for the deaf community. Please review our contribution guidelines and ensure all features maintain our commitment to Deaf-first design principles.
+We welcome contributions that enhance accessibility and user experience for the deaf community. Please review our [contribution guidelines](CONTRIBUTING.md) and ensure all features maintain our commitment to Deaf-first design principles.
+
+### Migration Contributors
+
+If you're contributing during the migration period:
+- Review the [Migration Plan](MIGRATION_PLAN.md)
+- Check the [Migration Progress](docs/migration/progress.md)
+- Use appropriate issue templates in `.github/ISSUE_TEMPLATE/`
+
+## Documentation
+
+- **[Migration Plan](MIGRATION_PLAN.md)** - Repository consolidation roadmap
+- **[Repository Audit](REPOSITORY_AUDIT.md)** - Template for auditing repositories
+- **[Architecture](docs/architecture/README.md)** - System architecture documentation
+- **[Contributing](CONTRIBUTING.md)** - Contribution guidelines
+- **[Migration Progress](docs/migration/progress.md)** - Current migration status
 
 ## License
 
