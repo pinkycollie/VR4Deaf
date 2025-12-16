@@ -247,18 +247,18 @@
 ## Resources
 
 ### Documentation
-- [Migration Plan](../MIGRATION_PLAN.md)
-- [Repository Audit Template](../REPOSITORY_AUDIT.md)
-- [Architecture Documentation](architecture/README.md)
-- [Contributing Guidelines](../CONTRIBUTING.md)
+- [Migration Plan](../../MIGRATION_PLAN.md)
+- [Repository Audit Template](../../REPOSITORY_AUDIT.md)
+- [Architecture Documentation](../architecture/README.md)
+- [Contributing Guidelines](../../CONTRIBUTING.md)
 
 ### Issue Templates
-- [Phase 1 Template](.github/ISSUE_TEMPLATE/migration-phase-1.md)
-- [Phase 2 Template](.github/ISSUE_TEMPLATE/migration-phase-2.md)
-- [Phase 3 Template](.github/ISSUE_TEMPLATE/migration-phase-3.md)
-- [Phase 4 Template](.github/ISSUE_TEMPLATE/migration-phase-4.md)
-- [Phase 5 Template](.github/ISSUE_TEMPLATE/migration-phase-5.md)
-- [Phase 6 Template](.github/ISSUE_TEMPLATE/migration-phase-6.md)
+- [Phase 1 Template](../../.github/ISSUE_TEMPLATE/migration-phase-1.md)
+- [Phase 2 Template](../../.github/ISSUE_TEMPLATE/migration-phase-2.md)
+- [Phase 3 Template](../../.github/ISSUE_TEMPLATE/migration-phase-3.md)
+- [Phase 4 Template](../../.github/ISSUE_TEMPLATE/migration-phase-4.md)
+- [Phase 5 Template](../../.github/ISSUE_TEMPLATE/migration-phase-5.md)
+- [Phase 6 Template](../../.github/ISSUE_TEMPLATE/migration-phase-6.md)
 
 ## Communication
 

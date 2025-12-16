@@ -117,7 +117,7 @@ Migration will be complete when:
 
 **Total Duration**: 11-14 weeks (≈3 months)  
 **Started**: 2025-12-16  
-**Projected Completion**: Q1 2025
+**Projected Completion**: Q1 2026
 
 ---
 
