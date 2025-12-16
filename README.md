@@ -16,7 +16,11 @@ Built on modern collaboration tools with accessibility at its core:
 
 ### Frontend Components
 
-- React/Next.js with TailwindCSS
+- **Framework:** Next.js 15.2.4 (React 19, App Router)
+- **Styling:** TailwindCSS 3.4 with custom Magician theme
+- **UI Library:** Radix UI + shadcn/ui components
+- **State Management:** React Context + Hooks
+- **Forms:** React Hook Form + Zod validation
 - ASL-friendly navigation system
 - Visual-first notification framework
 - High-contrast UI elements
@@ -28,17 +32,44 @@ Built on modern collaboration tools with accessibility at its core:
 - TensorFlow for AI/ML capabilities
 - LiveBlock for real-time collaboration
 
+### Architecture Documentation
+
+Comprehensive architecture documentation is available in the `/docs` folder:
+
+- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Complete platform architecture, service boundaries, routing structure, and integration patterns
+- **[API_INTEGRATION.md](docs/API_INTEGRATION.md)** - API endpoint specifications, authentication flows, and integration examples
+- **[COMPONENT_LIBRARY.md](docs/COMPONENT_LIBRARY.md)** - Magician component library documentation with usage examples
+- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Deployment strategies, CI/CD pipeline, and configuration guide
+
 ## File Structure
 
 ```
-project_root/
-├── frontend/                  # React/Next.js frontend application
-├── backend/                   # API services and business logic
-├── ml_services/              # AI/ML models and processing
-├── data_processing/          # Data pipeline and analytics
-├── accessibility/            # Accessibility features and tools
-├── docs/                     # Documentation and guides
-└── tests/                    # Test suites
+VR4Deaf/
+├── app/                       # Next.js app directory
+│   ├── api/                   # API routes
+│   ├── client/                # Client portal routes (future)
+│   ├── vendor/                # Vendor portal routes (future)
+│   ├── admin/                 # Admin hub routes (future)
+│   ├── layout.tsx             # Root layout
+│   └── page.tsx               # Homepage
+├── components/                # React components
+│   ├── magician/              # Magician-branded reusable modules (future)
+│   ├── ui/                    # Base UI primitives (shadcn/ui)
+│   ├── features/              # Feature-specific components (future)
+│   └── shared/                # Shared components
+├── lib/                       # Utility functions and helpers
+│   ├── api/                   # API adaptors (future)
+│   ├── auth/                  # Authentication utilities (future)
+│   └── utils.ts               # General utilities
+├── hooks/                     # Custom React hooks
+├── docs/                      # Architecture & API documentation
+│   ├── ARCHITECTURE.md        # Platform architecture
+│   ├── API_INTEGRATION.md     # API integration guide
+│   ├── COMPONENT_LIBRARY.md   # Component documentation
+│   └── DEPLOYMENT.md          # Deployment guide
+├── public/                    # Static assets
+├── styles/                    # Global styles
+└── __tests__/                 # Test suites
 
 ```
 
@@ -46,20 +77,50 @@ project_root/
 
 ### Prerequisites
 
-- Node.js (v16+)
-- Python 3.8+
-- MongoDB
-- PostgreSQL
+- **Node.js** v18.0.0 or higher
+- **pnpm** v8.0.0 or higher (preferred package manager)
+- **Git** v2.30.0 or higher
 
 ### Installation
-Clone the repository: `git clone`
 
-1. Install frontend dependencies: `cd frontend && npm install`
-2. Install backend dependencies: `cd backend && pip install -r requirements.txt`
-3. Configure environment variables (see `.env.example`)
-4. Start development servers:
-- Frontend: `npm run dev`
-- Backend: `python manage.py runserver`
+```bash
+# Clone the repository
+git clone https://github.com/pinkycollie/VR4Deaf.git
+cd VR4Deaf
+
+# Install dependencies using pnpm
+pnpm install
+
+# Copy environment variables
+cp .env.example .env.local
+
+# Configure environment variables in .env.local
+# See docs/DEPLOYMENT.md for detailed configuration
+
+# Start development server
+pnpm dev
+```
+
+The application will be available at `http://localhost:3000`
+
+### Available Scripts
+
+```bash
+pnpm dev          # Start development server
+pnpm build        # Build for production
+pnpm start        # Start production server
+pnpm lint         # Run linter
+pnpm test         # Run tests
+pnpm test:watch   # Run tests in watch mode
+```
+
+### Quick Start Guide
+
+1. **Review Architecture** - Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) to understand the platform structure
+2. **Setup Environment** - Configure your `.env.local` file with necessary API keys
+3. **Run Development Server** - Execute `pnpm dev` to start developing
+4. **Explore Components** - Check [docs/COMPONENT_LIBRARY.md](docs/COMPONENT_LIBRARY.md) for available UI components
+5. **API Integration** - Refer to [docs/API_INTEGRATION.md](docs/API_INTEGRATION.md) for backend integration
 
 ## Implementation Timeline
 
