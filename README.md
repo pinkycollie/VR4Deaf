@@ -31,14 +31,25 @@ Built on modern collaboration tools with accessibility at its core:
 ## File Structure
 
 ```
-project_root/
-├── frontend/                  # React/Next.js frontend application
-├── backend/                   # API services and business logic
-├── ml_services/              # AI/ML models and processing
-├── data_processing/          # Data pipeline and analytics
-├── accessibility/            # Accessibility features and tools
-├── docs/                     # Documentation and guides
-└── tests/                    # Test suites
+VR4Deaf/
+├── app/                       # Next.js application routes and pages
+├── components/                # React components
+├── hooks/                     # Custom React hooks
+├── lib/                       # Utility libraries
+├── magician-modules/          # Developer-facing reusable modules
+│   ├── engines/              # Core processing engines
+│   ├── ui-kits/              # UI component libraries
+│   ├── agents/               # AI-powered agents
+│   └── branded/              # Premium/enterprise modules
+├── docs/                      # Comprehensive documentation
+│   ├── DEVELOPER_MODULES.md
+│   ├── BRANDING_LICENSING.md
+│   ├── CONTRIBUTING_MODULES.md
+│   ├── INTEGRATION_GUIDE.md
+│   ├── PUBLISHING_WORKFLOW.md
+│   └── mbtq_architecture.html
+├── public/                    # Static assets
+└── styles/                    # Global styles
 
 ```
 
@@ -81,9 +92,31 @@ Phase 3 (2-3 weeks): Business Modules
 - Entrepreneur support system
 - Mentorship platform
 
+## Developer Modules
+
+The VR4Deaf platform provides a comprehensive suite of developer modules under the `@vr4deaf/magician-*` namespace. These modules enable rapid development of Deaf-first applications with built-in accessibility features.
+
+### Module Categories
+
+- **Engines** (`@vr4deaf/magician-engine-*`): Core processing engines for accessibility, AI/ML, and real-time features
+- **UI Kits** (`@vr4deaf/magician-ui-*`): Visual-first component libraries with ASL integration
+- **Agents** (`@vr4deaf/magician-agent-*`): AI-powered automation and assistance modules
+- **Branded** (`@vr4deaf/magician-branded-*`): Premium enterprise features (MBTQ Universe)
+
+### Documentation
+
+- 📚 [Developer Modules Guide](./docs/DEVELOPER_MODULES.md) - Complete module development guide
+- 🎨 [Branding & Licensing](./docs/BRANDING_LICENSING.md) - Licensing and branding guidelines
+- 🤝 [Contributing Modules](./docs/CONTRIBUTING_MODULES.md) - Module contribution process
+- 🔗 [Integration Guide](./docs/INTEGRATION_GUIDE.md) - Cross-stack integration patterns
+- 📦 [Publishing Workflow](./docs/PUBLISHING_WORKFLOW.md) - Module publishing process
+- 🏗️ [MBTQ Architecture](./docs/mbtq_architecture.html) - Complete platform architecture
+
 ## Contributing
 
 We welcome contributions that enhance accessibility and user experience for the deaf community. Please review our contribution guidelines and ensure all features maintain our commitment to Deaf-first design principles.
+
+For contributing to developer modules, see [CONTRIBUTING_MODULES.md](./docs/CONTRIBUTING_MODULES.md).
 
 ## License
 

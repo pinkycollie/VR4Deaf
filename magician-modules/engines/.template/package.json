@@ -1,0 +1,51 @@
+{
+  "name": "@vr4deaf/magician-engine-template",
+  "version": "0.1.0",
+  "description": "Template for creating new Magician engine modules",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "prepublishOnly": "pnpm build && pnpm test"
+  },
+  "keywords": [
+    "vr4deaf",
+    "deaf-first",
+    "accessibility",
+    "magician",
+    "engine"
+  ],
+  "author": "VR4Deaf Team <contact@vr4deaf.org>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pinkycollie/VR4Deaf.git",
+    "directory": "magician-modules/engines/template"
+  },
+  "bugs": {
+    "url": "https://github.com/pinkycollie/VR4Deaf/issues"
+  },
+  "homepage": "https://github.com/pinkycollie/VR4Deaf/tree/main/magician-modules/engines/template",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "typescript": "^5",
+    "vitest": "^4.0.14"
+  }
+}
