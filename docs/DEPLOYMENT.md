@@ -208,89 +208,31 @@ vercel --prod
 
 #### Dockerfile
 
-```dockerfile
-# Build stage
-FROM node:18-alpine AS builder
+The project includes a multi-stage Dockerfile for production deployment. See `Dockerfile` in the root directory.
 
-WORKDIR /app
-
-# Install dependencies
-COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
-
-# Copy source
-COPY . .
-
-# Build application
-RUN pnpm build
-
-# Production stage
-FROM node:18-alpine AS runner
-
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-# Create non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Copy built application
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
-
-CMD ["node", "server.js"]
-```
+Key features:
+- Multi-stage build for optimized image size
+- Uses Next.js standalone output
+- Non-root user for security
+- Alpine Linux base for minimal attack surface
 
 #### docker-compose.yml
 
+The project includes a docker-compose configuration with MongoDB. See `docker-compose.yml` in the root directory.
+
+Services included:
+- **app**: VR4Deaf Next.js application
+- **mongodb**: MongoDB 7.0 for data storage
+
+Configuration:
 ```yaml
-version: '3.8'
-
-services:
-  web:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - NEXT_PUBLIC_API_BASE_URL=${API_BASE_URL}
-      - AUTH_SECRET=${AUTH_SECRET}
-    depends_on:
-      - postgres
-      - mongodb
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:15-alpine
-    environment:
-      - POSTGRES_DB=vr4deaf
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    restart: unless-stopped
-
-  mongodb:
-    image: mongo:6
-    environment:
-      - MONGO_INITDB_DATABASE=vr4deaf
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
-    volumes:
-      - mongo_data:/data/db
-    restart: unless-stopped
-
-volumes:
-  postgres_data:
-  mongo_data:
+# Example environment variables for docker-compose
+MONGODB_USERNAME=admin
+MONGODB_PASSWORD=secure_password_here
+MONGODB_DATABASE=vr4deaf
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_service_key_here
 ```
 
 #### Build and Run
