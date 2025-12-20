@@ -2,6 +2,11 @@
 
 A comprehensive Deaf-first platform connecting clients with vocational rehabilitation resources, workforce solutions, and business development opportunities through AI-powered accessibility.
 
+> **🔄 Repository Migration In Progress**: This repository is being consolidated from multiple VR4DEAF-related codebases. See [MIGRATION_PLAN.md](MIGRATION_PLAN.md) for details.
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![In Migration](https://img.shields.io/badge/Status-Migrating-yellow.svg)](docs/migration/progress.md)
+
 ## Core Features
 
 - ASL-integrated learning environments with visual-first design
@@ -10,13 +15,35 @@ A comprehensive Deaf-first platform connecting clients with vocational rehabilit
 - Business development modules for deaf entrepreneurs
 - Automated virtual support system with 24/7 assistance
 
+## 🔄 Migration Status
+
+This repository is undergoing consolidation to become the single source of truth for all VR4DEAF-related code, tools, and services. 
+
+**Current Phase**: Phase 1 - Repository Audit  
+**Progress**: Planning Complete, Audit Not Started
+
+### Migration Phases
+- [x] Phase 0: Planning and Documentation
+- [ ] Phase 1: Repository Audit and Discovery
+- [ ] Phase 2: Archive and Deprecation
+- [ ] Phase 3: Frontend and Tools Migration
+- [ ] Phase 4: Backend, AI, and Service Migration
+- [ ] Phase 5: Update Links, Configs, and Metadata
+- [ ] Phase 6: Final Review and Deployment
+
+📊 **[View Detailed Progress](docs/migration/progress.md)** | 📋 **[Read Migration Plan](MIGRATION_PLAN.md)**
+
 ## Technical Architecture
 
 Built on modern collaboration tools with accessibility at its core:
 
 ### Frontend Components
 
-- React/Next.js with TailwindCSS
+- **Framework:** Next.js 15.2.4 (React 19, App Router)
+- **Styling:** TailwindCSS 3.4 with custom Magician theme
+- **UI Library:** Radix UI + shadcn/ui components
+- **State Management:** React Context + Hooks
+- **Forms:** React Hook Form + Zod validation
 - ASL-friendly navigation system
 - Visual-first notification framework
 - High-contrast UI elements
@@ -27,6 +54,15 @@ Built on modern collaboration tools with accessibility at its core:
 - MongoDB and PostgreSQL databases
 - TensorFlow for AI/ML capabilities
 - LiveBlock for real-time collaboration
+
+### Architecture Documentation
+
+Comprehensive architecture documentation is available in the `/docs` folder:
+
+- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Complete platform architecture, service boundaries, routing structure, and integration patterns
+- **[API_INTEGRATION.md](docs/API_INTEGRATION.md)** - API endpoint specifications, authentication flows, and integration examples
+- **[COMPONENT_LIBRARY.md](docs/COMPONENT_LIBRARY.md)** - Magician component library documentation with usage examples
+- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Deployment strategies, CI/CD pipeline, and configuration guide
 
 ## File Structure
 
@@ -50,6 +86,31 @@ VR4Deaf/
 │   └── mbtq_architecture.html
 ├── public/                    # Static assets
 └── styles/                    # Global styles
+├── app/                       # Next.js app directory
+│   ├── api/                   # API routes
+│   ├── client/                # Client portal routes (future)
+│   ├── vendor/                # Vendor portal routes (future)
+│   ├── admin/                 # Admin hub routes (future)
+│   ├── layout.tsx             # Root layout
+│   └── page.tsx               # Homepage
+├── components/                # React components
+│   ├── magician/              # Magician-branded reusable modules (future)
+│   ├── ui/                    # Base UI primitives (shadcn/ui)
+│   ├── features/              # Feature-specific components (future)
+│   └── shared/                # Shared components
+├── lib/                       # Utility functions and helpers
+│   ├── api/                   # API adaptors (future)
+│   ├── auth/                  # Authentication utilities (future)
+│   └── utils.ts               # General utilities
+├── hooks/                     # Custom React hooks
+├── docs/                      # Architecture & API documentation
+│   ├── ARCHITECTURE.md        # Platform architecture
+│   ├── API_INTEGRATION.md     # API integration guide
+│   ├── COMPONENT_LIBRARY.md   # Component documentation
+│   └── DEPLOYMENT.md          # Deployment guide
+├── public/                    # Static assets
+├── styles/                    # Global styles
+└── __tests__/                 # Test suites
 
 ```
 
@@ -57,20 +118,50 @@ VR4Deaf/
 
 ### Prerequisites
 
-- Node.js (v16+)
-- Python 3.8+
-- MongoDB
-- PostgreSQL
+- **Node.js** v18.0.0 or higher
+- **pnpm** v8.0.0 or higher (preferred package manager)
+- **Git** v2.30.0 or higher
 
 ### Installation
-Clone the repository: `git clone`
 
-1. Install frontend dependencies: `cd frontend && npm install`
-2. Install backend dependencies: `cd backend && pip install -r requirements.txt`
-3. Configure environment variables (see `.env.example`)
-4. Start development servers:
-- Frontend: `npm run dev`
-- Backend: `python manage.py runserver`
+```bash
+# Clone the repository
+git clone https://github.com/pinkycollie/VR4Deaf.git
+cd VR4Deaf
+
+# Install dependencies using pnpm
+pnpm install
+
+# Copy environment variables
+cp .env.example .env.local
+
+# Configure environment variables in .env.local
+# See docs/DEPLOYMENT.md for detailed configuration
+
+# Start development server
+pnpm dev
+```
+
+The application will be available at `http://localhost:3000`
+
+### Available Scripts
+
+```bash
+pnpm dev          # Start development server
+pnpm build        # Build for production
+pnpm start        # Start production server
+pnpm lint         # Run linter
+pnpm test         # Run tests
+pnpm test:watch   # Run tests in watch mode
+```
+
+### Quick Start Guide
+
+1. **Review Architecture** - Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) to understand the platform structure
+2. **Setup Environment** - Configure your `.env.local` file with necessary API keys
+3. **Run Development Server** - Execute `pnpm dev` to start developing
+4. **Explore Components** - Check [docs/COMPONENT_LIBRARY.md](docs/COMPONENT_LIBRARY.md) for available UI components
+5. **API Integration** - Refer to [docs/API_INTEGRATION.md](docs/API_INTEGRATION.md) for backend integration
 
 ## Implementation Timeline
 
@@ -114,7 +205,22 @@ The VR4Deaf platform provides a comprehensive suite of developer modules under t
 
 ## Contributing
 
-We welcome contributions that enhance accessibility and user experience for the deaf community. Please review our contribution guidelines and ensure all features maintain our commitment to Deaf-first design principles.
+We welcome contributions that enhance accessibility and user experience for the deaf community. Please review our [contribution guidelines](CONTRIBUTING.md) and ensure all features maintain our commitment to Deaf-first design principles.
+
+### Migration Contributors
+
+If you're contributing during the migration period:
+- Review the [Migration Plan](MIGRATION_PLAN.md)
+- Check the [Migration Progress](docs/migration/progress.md)
+- Use appropriate issue templates in `.github/ISSUE_TEMPLATE/`
+
+## Documentation
+
+- **[Migration Plan](MIGRATION_PLAN.md)** - Repository consolidation roadmap
+- **[Repository Audit](REPOSITORY_AUDIT.md)** - Template for auditing repositories
+- **[Architecture](docs/architecture/README.md)** - System architecture documentation
+- **[Contributing](CONTRIBUTING.md)** - Contribution guidelines
+- **[Migration Progress](docs/migration/progress.md)** - Current migration status
 
 For contributing to developer modules, see [CONTRIBUTING_MODULES.md](./docs/CONTRIBUTING_MODULES.md).
 
