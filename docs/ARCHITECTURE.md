@@ -1135,8 +1135,7 @@ describe('ComponentName', () => {
 
 ```yaml
 # .github/workflows/deploy.yml
-name: Deploy to Production
-
+name: Install, Build and Test t
 on:
   push:
     branches: [main]
@@ -1150,9 +1149,7 @@ jobs:
       - run: pnpm install
       - run: pnpm build
       - run: pnpm test
-      - name: Deploy to Vercel
-        uses: vercel/deploy@v1
-```
+     
 
 ---
 
