@@ -1,0 +1,33 @@
+name: Auto Release (Deno Minimal)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number (e.g. 0.1.0)"
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.event.inputs.version }}
+          release_name: "Release v${{ github.event.inputs.version }}"
+          body: |
+            ## VR4Deaf Platform v${{ github.event.inputs.version }}
+
+            This is a manually triggered development release.
+
+            More automation will be added as the project matures.
+

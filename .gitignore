@@ -25,3 +25,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# docker
+*.log
+docker-compose.override.yml
+
+# mongodb data
+/data/db
+/data/configdb

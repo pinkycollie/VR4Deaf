@@ -1,0 +1,6 @@
+# pnpm workspace configuration
+packages:
+  - 'magician-modules/engines/*'
+  - 'magician-modules/ui-kits/*'
+  - 'magician-modules/agents/*'
+  - 'magician-modules/branded/*'
