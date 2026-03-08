@@ -1,0 +1,73 @@
+If you’re aiming to onboard specialists into 360 Magicians—particularly for roles in VR4Deaf, Job Magician, or Business Magician—the UNT WISE Community Rehabilitation Program (CRP) training offers a robust credentialing pathway aligned with Texas Workforce Commission-Vocational Rehabilitation (TWC-VR) standards.
+
+⸻
+
+🎓 Recommended Credentialing Pathway
+
+To ensure specialists are well-equipped to support individuals with disabilities, consider the following credentialing sequence:  
+
+1. Job Skills Training Credential
+	•	Purpose: Equips professionals to provide job skills training to VR customers.
+	•	Format: Self-paced online course.
+	•	Duration: 15 contact hours.
+	•	Fee: $135.
+	•	Key Topics:
+	•	Community employment aspects.
+	•	Employment process understanding.
+	•	Effective communication strategies.
+	•	Workplace behavior and training techniques.
+	•	Requirement: Achieve a score of 75% or higher on the final test.
+	•	More Info:         
+
+2. Job Placement Credential
+	•	Purpose: Prepares specialists to assist VR customers in job searching and placement.
+	•	Format: Instructor-led, six-week course.
+	•	Duration: 20 contact hours.
+	•	Fee: $280.
+	•	Prerequisite: Completion of the Job Skills Training Credential.
+	•	Key Topics:
+	•	Resume creation and application processes.
+	•	Interview preparation and job search strategies.
+	•	Addressing employment barriers.
+	•	Requirement: Achieve a score of 75% or higher on the final test.
+	•	More Info:     
+
+3. Supported Employment Credential
+	•	Purpose: Trains specialists to support individuals with significant disabilities in obtaining and maintaining employment.
+	•	Format: Instructor-led course.
+	•	Prerequisites:
+	•	Completion of both Job Skills Training and Job Placement Credentials.
+	•	At least 60 college credit hours.
+	•	Key Topics:
+	•	Individualized job matching.
+	•	Ongoing support services.
+	•	Establishing extended services.
+	•	More Info:     
+
+⸻
+
+🔄 Credential Renewal Requirements
+
+To maintain active credentials, specialists must fulfill continuing education (CE) requirements every three years:  
+	•	For Job Skills Training Credential Only:
+	•	5 CE hours, including 1 hour in Ethics.
+	•	At least 3 hours must be from UNT WISE.    
+	•	For Combined Credentials (Job Skills Training + Job Placement and/or Supported Employment):
+	•	30 CE hours, including 6 hours in Ethics.
+
+🛠️ Integration into 360 Magicians
+
+To effectively incorporate these credentialed specialists into your platform:
+	•	Role Assignment: Map credentials to specific roles within your system (e.g., Job Skills Trainers, Job Placement Specialists).  
+	•	Access Control: Implement role-based access to platform features, ensuring specialists can only access functionalities relevant to their credentials.
+	•	Credential Verification: Integrate with UNT WISE’s credential verification portal to automate the validation of specialist credentials.
+	•	Continuing Education Tracking: Develop a dashboard for specialists to monitor their CE hours
+	•	At least 15 hours must be from UNT WISE.
+
+Renewal applications should be submitted during the last quarter of the credentialing period. Late submissions may incur additional fees and are not accepted beyond 90 days after the credential expiration date.   
+
+⸻ and receive reminders for upcoming renewals.  
+
+⸻
+
+If you’d like assistance in designing the integration architecture or developing specific modules for credential management within 360 Magicians, feel free to ask!
