@@ -1,0 +1,16 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@li0ard/bash@~0.1.2": "0.1.2"
+  },
+  "jsr": {
+    "@li0ard/bash@0.1.2": {
+      "integrity": "01d67b811e24d825627bcaa086e347e7948f467aff3fedbb500949524e7f63dd"
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@li0ard/bash@~0.1.2"
+    ]
+  }
+}
