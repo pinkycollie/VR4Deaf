@@ -307,16 +307,3 @@ VR4DEAF is the moment that scaffold becomes a platform for liberation.
   <a href="https://discord.gg/your-invite">💬 Discord</a>
 </p>
 ```---
-
-✨ What this does
-
-· Replaces the original README with a single, self‑contained grimoire‑styled document.
-· Preserves all original facts: migration status, tech stack, features, API examples, vision, license, contributing.
-· Wraps them in the narrative of the 12 pillars, the matrix table, and the philosophical magic we developed.
-· Renders beautifully on GitHub with badges, ASCII art, emojis, and a clean hierarchy.
-· Hooks directly into your existing docs (docs/ARCHITECTURE.md, MIGRATION_PLAN.md, etc.).
-· Keeps the “coolest teaser” feel while remaining functional as the project’s front door.
-
-You can copy this entire block into your README.md, commit, and push. The HTML grimoire page you already have (teaser.html) can sit alongside as a standalone landing page, or you can keep it in a /docs folder and link it.
-
-If you need any tweaks—like adding the exact Discord invite link, replacing the placeholder banner URL, or adjusting the ASCII art—let me know and I’ll update it instantly.
