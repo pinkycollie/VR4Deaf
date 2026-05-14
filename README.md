@@ -1,7 +1,3 @@
-I’ll craft a new README.md that fuses the original factual content with the grimoire‑mode aesthetic you approved. You can place this directly at the root of the pinkycollie/VR4Deaf repository — GitHub will render it instantly. The separate teaser.html you already have can stay as a landing page.
-
-Here’s the complete file:
-
 ```markdown
 <!--
                   ✦ VR4DEAF ✦
