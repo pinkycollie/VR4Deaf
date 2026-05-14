@@ -1,5 +1,3 @@
-
-```markdown
 <!--
                   ✦ VR4DEAF ✦
    The Platform Where Accessibility Becomes Architecture
