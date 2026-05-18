@@ -31,6 +31,8 @@ env:
 jobs:
   accessibility-gate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       passed: ${{ steps.check.outputs.passed }}
     steps:
@@ -48,6 +50,8 @@ jobs:
     needs: accessibility-gate
     if: needs.accessibility-gate.outputs.passed == 'true'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         repo: ${{ fromJson(inputs.target_repos) }}
@@ -91,6 +95,8 @@ jobs:
     needs: migration-orchestration
     if: always()
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout dashboard repo
         uses: actions/checkout@v4
