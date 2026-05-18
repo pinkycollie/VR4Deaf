@@ -1,5 +1,7 @@
 name: ♿ Migration Dispatcher (Deaf‑Accessible)
 
+permissions: {}
+
 on:
   workflow_dispatch:
     inputs:
@@ -30,6 +32,8 @@ env:
 
 jobs:
   accessibility-gate:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -47,6 +51,8 @@ jobs:
           min_score: ${{ inputs.accessibility_level }}
 
   migration-orchestration:
+    permissions:
+      contents: read
     needs: accessibility-gate
     if: needs.accessibility-gate.outputs.passed == 'true'
     runs-on: ubuntu-latest
@@ -92,6 +98,8 @@ jobs:
         continue-on-error: true
 
   dashboard-update:
+    permissions:
+      contents: write
     needs: migration-orchestration
     if: always()
     runs-on: ubuntu-latest
