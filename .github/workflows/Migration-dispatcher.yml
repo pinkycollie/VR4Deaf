@@ -1,0 +1,124 @@
+name: ♿ Migration Dispatcher (Deaf‑Accessible)
+
+permissions: {}
+
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Migration phase (1-6)'
+        required: true
+        type: choice
+        options:
+          - audit
+          - archive
+          - frontend
+          - backend
+          - update-links
+          - final-review
+      target_repos:
+        description: 'JSON list of repos to migrate, e.g. ["repo-a","repo-b"]'
+        required: true
+        type: string
+      accessibility_level:
+        description: 'Minimum accessibility score required (0-100)'
+        required: false
+        default: '80'
+
+env:
+  DASHBOARD_REPO: pinkycollie/VR4Deaf   # where the dashboard lives
+  DASHBOARD_BRANCH: gh-pages
+  CAPTION_API_KEY: ${{ secrets.CAPTION_API_KEY }}   # if using external service
+
+jobs:
+  accessibility-gate:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      passed: ${{ steps.check.outputs.passed }}
+    steps:
+      - name: Checkout dispatcher code
+        uses: actions/checkout@v4
+
+      - name: Run accessibility pre-flight
+        id: check
+        uses: ./.github/workflows/accessibility-check.yml
+        with:
+          repos: ${{ inputs.target_repos }}
+          min_score: ${{ inputs.accessibility_level }}
+
+  migration-orchestration:
+    permissions:
+      contents: read
+    needs: accessibility-gate
+    if: needs.accessibility-gate.outputs.passed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        repo: ${{ fromJson(inputs.target_repos) }}
+    steps:
+      - name: 🔔 Notify start (visual + caption)
+        run: |
+          echo "::notice title=Migration ${{ inputs.phase }}::${{ matrix.repo }} started"
+          echo "MIGRATION_STARTED=true" >> $GITHUB_ENV
+
+      - name: Dispatch to target repo
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.DISPATCH_PAT }}
+          repository: ${{ matrix.repo }}
+          event-type: migration-phase-${{ inputs.phase }}
+          client-payload: '{"phase":"${{ inputs.phase }}","callback_repo":"${{ github.repository }}","run_id":"${{ github.run_id }}"}'
+
+      - name: Wait for callback (polling)
+        run: |
+          # Wait up to 30 minutes for the dispatched repo to report back via a status file
+          for i in {1..60}; do
+            sleep 30
+            STATUS=$(gh api repos/${{ github.repository }}/contents/migration-status/${{ matrix.repo }}.json --jq '.content' | base64 -d 2>/dev/null || echo '{"status":"pending"}')
+            if [ "$(echo $STATUS | jq -r .status)" = "completed" ]; then
+              echo "Migration completed for ${{ matrix.repo }}"
+              break
+            fi
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate captioned visual badge
+        run: |
+          node scripts/caption-logs.js \
+            --repo ${{ matrix.repo }} \
+            --phase ${{ inputs.phase }} \
+            --status "$(cat ./status.txt)"
+        continue-on-error: true
+
+  dashboard-update:
+    permissions:
+      contents: write
+    needs: migration-orchestration
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout dashboard repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.DASHBOARD_REPO }}
+          ref: ${{ env.DASHBOARD_BRANCH }}
+
+      - name: Generate dashboard JSON
+        run: node scripts/generate-dashboard.js
+
+      - name: Commit updated dashboard
+        run: |
+          git config user.name "DeafOS Bot"
+          git config user.email "bot@vr4deaf.org"
+          git add dashboard/data.json
+          git commit -m "Update migration dashboard [skip ci]" || echo "No changes"
+          git push

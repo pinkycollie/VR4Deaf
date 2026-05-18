@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@li0ard/bash": "jsr:@li0ard/bash@^0.1.2"
+  }
+}

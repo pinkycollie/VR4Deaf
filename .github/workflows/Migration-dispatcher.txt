@@ -1,0 +1,11 @@
+.github/
+  workflows/
+    migration-dispatcher.yml
+    migration-step.yml        (callable from other repos)
+    accessibility-check.yml    (reusable)
+scripts/
+  generate-dashboard.js       (Node script to build status page)
+  caption-logs.js             (optional: calls external caption API)
+dashboard/
+  index.html                  (static visual dashboard, updated by action)
+  data.json                   (migration statuses, committed by the dispatcher)
