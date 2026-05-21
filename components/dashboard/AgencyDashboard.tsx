@@ -4,8 +4,8 @@ import * as React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Badge } from "@/components/ui/badge";
-import { AgencySelector } from "./AgencySelector";
+import { Button } from "@/components/ui/button";
+import { CreateEmploymentPlanModal } from "@/components/plans/CreateEmploymentPlanModal";
 import { DashboardMetricsComponent } from "./DashboardMetrics";
 import { CaseList } from "./CaseList";
 import {
@@ -20,12 +20,9 @@ import { format } from "date-fns";
 import {
   LayoutDashboard,
   FileText,
-  Users,
-  Settings,
   Bell,
   Calendar,
   Briefcase,
-  CheckCircle2,
 } from "lucide-react";
 
 interface AgencyDashboardProps {
@@ -41,7 +38,7 @@ interface AgencyDashboardProps {
   activities?: ActivityItem[];
 }
 
-const activityIcons = {
+const activityIcons: Record<string, React.ComponentType<any>> = {
   case_update: FileText,
   appointment: Calendar,
   placement: Briefcase,
@@ -49,154 +46,31 @@ const activityIcons = {
   note: FileText,
 };
 
-// Mock data for demo
-const mockAgencies: Agency[] = [
-  {
-    id: "agency-001",
-    name: "VR Services Inc.",
-    type: "VR",
-    location: "Houston, TX",
-    activeClients: 45,
-  },
-  {
-    id: "agency-002",
-    name: "Pride Employment Center",
-    type: "LGBTQ+",
-    location: "Austin, TX",
-    activeClients: 32,
-  },
-  {
-    id: "agency-003",
-    name: "Deaf Career Solutions",
-    type: "Deaf",
-    location: "Dallas, TX",
-    activeClients: 28,
-  },
-  {
-    id: "agency-004",
-    name: "Inclusive Workforce Alliance",
-    type: "Multi-service",
-    location: "San Antonio, TX",
-    activeClients: 67,
-  },
-];
-
-const mockMetrics: DashboardMetrics = {
-  totalCases: 156,
-  activeCases: 89,
-  closedCases: 67,
-  successfulPlacements: 52,
-  averageTimeToPlacement: 87,
-  caseTrends: [
-    { month: "Jan", cases: 12, placements: 8 },
-    { month: "Feb", cases: 15, placements: 10 },
-    { month: "Mar", cases: 18, placements: 12 },
-    { month: "Apr", cases: 14, placements: 9 },
-    { month: "May", cases: 20, placements: 15 },
-    { month: "Jun", cases: 17, placements: 13 },
-  ],
-  outcomeDistribution: [
-    { outcome: "Employed", count: 52, percentage: 78 },
-    { outcome: "Education", count: 8, percentage: 12 },
-    { outcome: "Self-Employed", count: 5, percentage: 7 },
-    { outcome: "Other", count: 2, percentage: 3 },
-  ],
-  serviceUtilization: [
-    { service: "Assessment", hours: 245, clients: 45 },
-    { service: "Training", hours: 180, clients: 38 },
-    { service: "Counseling", hours: 320, clients: 67 },
-    { service: "Placement", hours: 156, clients: 29 },
-  ],
-};
-
-const mockRSACompliance: RSACompliance = {
-  status: "compliant",
-  lastReportDate: "2024-12-01",
-  nextDueDate: "2025-03-31",
-  missingFields: [],
-};
-
-const mockCases: Case[] = [
-  {
-    id: "CASE-001",
-    clientName: "John Smith",
-    counselorName: "Jane Doe",
-    status: "services",
-    priority: "high",
-    lastUpdated: "2024-12-20",
-    nextAppointment: "2024-12-23",
-    accessibilityNeeds: ["ASL Interpreter", "Visual Alerts"],
-  },
-  {
-    id: "CASE-002",
-    clientName: "Maria Garcia",
-    counselorName: "Jane Doe",
-    status: "assessment",
-    priority: "medium",
-    lastUpdated: "2024-12-19",
-    accessibilityNeeds: ["Captioning"],
-  },
-  {
-    id: "CASE-003",
-    clientName: "Alex Johnson",
-    counselorName: "Mike Wilson",
-    status: "placement",
-    priority: "high",
-    lastUpdated: "2024-12-21",
-    nextAppointment: "2024-12-24",
-    accessibilityNeeds: ["Flexible Hours", "Remote Options"],
-  },
-];
-
-const mockActivities: ActivityItem[] = [
-  {
-    id: "act-001",
-    type: "case_update",
-    title: "Case Updated",
-    description: "CASE-001 status changed to services",
-    timestamp: "2024-12-21T10:30:00Z",
-    userId: "user-001",
-    userName: "Jane Doe",
-  },
-  {
-    id: "act-002",
-    type: "appointment",
-    title: "Appointment Scheduled",
-    description: "Skills assessment for John Smith",
-    timestamp: "2024-12-21T09:15:00Z",
-    userId: "user-001",
-    userName: "Jane Doe",
-  },
-  {
-    id: "act-003",
-    type: "placement",
-    title: "Successful Placement",
-    description: "Client placed at Tech Solutions Inc.",
-    timestamp: "2024-12-20T16:45:00Z",
-    userId: "user-002",
-    userName: "Mike Wilson",
-  },
-];
-
 export function AgencyDashboard({
   userRole,
   userName,
   agencyName,
-  agencies = mockAgencies,
-  selectedAgency = mockAgencies[0],
+  agencies = [],
+  selectedAgency,
   onAgencyChange,
-  metrics = mockMetrics,
-  rsaCompliance = mockRSACompliance,
-  cases = mockCases,
-  activities = mockActivities,
+  metrics,
+  rsaCompliance,
+  cases = [],
+  activities = [],
 }: AgencyDashboardProps) {
-  const [currentAgency, setCurrentAgency] = React.useState<Agency | null>(
-    selectedAgency
-  );
+  
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [currentAgency, setCurrentAgency] = React.useState<Agency | null>(selectedAgency || null);
 
   const handleAgencyChange = (agency: Agency) => {
     setCurrentAgency(agency);
     onAgencyChange?.(agency);
+  };
+
+  const handlePlanCreated = (plan: any) => {
+    console.log("✅ Employment Plan Created:", plan);
+    // TODO: Refresh data, show toast notification, emit webhook
+    setModalOpen(false);
   };
 
   const roleDisplay = userRole.charAt(0).toUpperCase() + userRole.slice(1);
@@ -204,28 +78,35 @@ export function AgencyDashboard({
   return (
     <div className="space-y-6 p-6">
       {/* Header */}
-      <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
-            Welcome, {userName}
+            Welcome back, {userName}
           </h1>
           <p className="text-muted-foreground">
-            {roleDisplay} Dashboard • {agencyName}
+            {roleDisplay} Dashboard • {currentAgency?.name || agencyName}
           </p>
         </div>
-        <div className="flex items-center space-x-4">
-          <AgencySelector
-            agencies={agencies}
-            selectedAgency={currentAgency}
-            onSelect={handleAgencyChange}
-            className="w-[300px]"
-          />
-        </div>
+
+        <Button
+          onClick={() => setModalOpen(true)}
+          size="lg"
+          className="bg-green-600 hover:bg-green-700 text-white font-medium"
+        >
+          + Create Employment Plan
+        </Button>
       </div>
 
-      {/* Main Content */}
+      {/* Employment Plan Modal */}
+      <CreateEmploymentPlanModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSave={handlePlanCreated}
+      />
+
+      {/* Main Tabs */}
       <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList>
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="overview" className="gap-2">
             <LayoutDashboard className="h-4 w-4" />
             Overview
@@ -236,7 +117,6 @@ export function AgencyDashboard({
           </TabsTrigger>
           {(userRole === "admin" || userRole === "supervisor") && (
             <TabsTrigger value="reports" className="gap-2">
-              <FileText className="h-4 w-4" />
               Reports
             </TabsTrigger>
           )}
@@ -246,6 +126,7 @@ export function AgencyDashboard({
           </TabsTrigger>
         </TabsList>
 
+        {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-4">
           <DashboardMetricsComponent
             metrics={metrics}
@@ -253,65 +134,59 @@ export function AgencyDashboard({
           />
         </TabsContent>
 
+        {/* Cases Tab */}
         <TabsContent value="cases" className="space-y-4">
           <CaseList cases={cases} />
         </TabsContent>
 
+        {/* Reports Tab */}
         {(userRole === "admin" || userRole === "supervisor") && (
           <TabsContent value="reports" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>RSA-911 Reports</CardTitle>
-                <CardDescription>
-                  Generate and download compliance reports
-                </CardDescription>
+                <CardTitle>RSA-911 Compliance Reports</CardTitle>
+                <CardDescription>Generate and export federal/state reports</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Report generation interface would be implemented here
+                <p className="text-sm text-muted-foreground py-8 text-center">
+                  Report generation tools coming soon...
                 </p>
               </CardContent>
             </Card>
           </TabsContent>
         )}
 
+        {/* Activity Tab */}
         <TabsContent value="activity" className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle>Recent Activity</CardTitle>
-              <CardDescription>
-                Latest updates and actions in your agency
-              </CardDescription>
+              <CardDescription>Latest actions across your agency</CardDescription>
             </CardHeader>
             <CardContent>
-              <ScrollArea className="h-[600px] pr-4">
+              <ScrollArea className="h-[620px] pr-4">
                 <div className="space-y-4">
                   {activities.map((activity) => {
-                    const Icon = activityIcons[activity.type];
+                    const Icon = activityIcons[activity.type] || FileText;
                     return (
                       <div
                         key={activity.id}
-                        className="flex items-start gap-4 p-4 rounded-lg border"
+                        className="flex gap-4 p-4 border rounded-xl hover:bg-muted/50 transition-colors"
                       >
-                        <div className="mt-1">
-                          <Icon className="h-5 w-5 text-primary" />
+                        <div className="mt-0.5">
+                          <Icon className="h-5 w-5 text-muted-foreground" />
                         </div>
-                        <div className="flex-1 space-y-1">
-                          <div className="flex items-center justify-between">
-                            <h4 className="text-sm font-medium">
-                              {activity.title}
-                            </h4>
-                            <span className="text-xs text-muted-foreground">
-                              {format(
-                                new Date(activity.timestamp),
-                                "MMM d, h:mm a"
-                              )}
-                            </span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-2">
+                            <p className="font-medium text-sm">{activity.title}</p>
+                            <time className="text-xs text-muted-foreground whitespace-nowrap">
+                              {format(new Date(activity.timestamp), "MMM d, h:mm a")}
+                            </time>
                           </div>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
                             {activity.description}
                           </p>
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-xs text-muted-foreground mt-2">
                             by {activity.userName}
                           </p>
                         </div>
