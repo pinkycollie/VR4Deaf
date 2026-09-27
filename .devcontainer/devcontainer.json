@@ -1,0 +1,18 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {}"ghcr.io/helpers4/devcontainer/package-auto-install:1": {}
+"ghcr.io/devcontainers-extra/features/autoenv:1": {}"ghcr.io/devcontainers-extra/features/caddy:1": {}"ghcr.io/wxw-matt/devcontainer-features/command_runner:0": {}
+}"ghcr.io/postfinance/devcontainer-features/nginx:1": {}
+
+"ghcr.io/lee-orr/rusty-dev-containers/rust_windows_msvc:0": {}
+
+"ghcr.io/helpers4/devcontainer/dotfiles-sync:1": {}
+
+"ghcr.io/balazs23/devcontainers-features/nx:1": {}
+
+"ghcr.io/devcontainers-extra/features/prisma:2": {}
+
+"ghcr.io/joshuanianji/devcontainer-features/google-cloud-cli:1": {}
+
+"ghcr.io/devcontainers-extra/features/cloudflared-fips:1": {}"ghcr.io/joshuanianji/devcontainer-features/mount-pnpm-store:1": {}
+"ghcr.io/joshuanianji/devcontainer-features/mount-pnpm-store:1": {} 
